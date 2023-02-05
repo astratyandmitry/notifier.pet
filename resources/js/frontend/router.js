@@ -5,13 +5,8 @@ import axios from "axios";
 const routes = [
   {
     path: '/',
-    redirect: '/notifications',
-    name: 'home'
-  },
-  {
-    path: '/notifications',
-    name: 'notifications.list',
-    component: () => import('./views/NotificationsView.vue'),
+    name: 'home',
+    component: () => import('./views/HomeView.vue'),
   },
   {
     path: '/login',
@@ -20,7 +15,7 @@ const routes = [
     meta: {
       requiresAuth: false,
     },
-  },
+  }
 ]
 
 const router = createRouter({
@@ -38,7 +33,7 @@ router.beforeEach((to) => {
   if (to.meta.requiresAuth && !auth.isLoggedIn) {
     return {
       name: "login",
-      query: { redirect: to.fullPath },
+      query: {redirect: to.fullPath},
     };
   }
 
@@ -53,6 +48,17 @@ router.beforeEach((to) => {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   }
+
+  axios.interceptors.response.use(function (response) {
+    return response;
+  }, function (error) {
+    if (error.response.status) {
+      auth.resetToken()
+      router.push({name: "login"})
+    }
+
+    return Promise.reject(error.response.status);
+  });
 });
 
 export default router;

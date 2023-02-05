@@ -5,9 +5,9 @@ const message = ref("Hello from Frontend");
 </script>
 
 <template>
-  <h1 class="text-2xl text-center p-12 logotype">
-    {{ message }}
-  </h1>
+  <div class="min-h-screen w-full antialiased bg-white">
+    <RouterView />
+  </div>
 </template>
 
 <style lang="postcss" scoped>
