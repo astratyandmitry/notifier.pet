@@ -2,23 +2,27 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Notification;
+use App\Models\NotificationCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            AdminSeeder::class,
+            NotificationCategorySeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(UserSeeder::class);
+
+        Notification::factory(10)->create();
+
+        Notification::query()->get()->map(function (Notification $notification): void {
+            $notification->categoriesSync(
+                NotificationCategory::query()->inRandomOrder()->limit(rand(1, 3))->pluck('id')
+            );
+        });
     }
 }

@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pivot_notification_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 120)->unique()->index();
-            $table->string('password', 500);
-            $table->timestamps();
+            $table->foreignId('notification_id')->constrained('notifications');
+            $table->foreignId('category_id')->constrained('notification_categories');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pivot_notification_categories');
     }
 };
