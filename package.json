@@ -1,14 +1,23 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "axios": "^1.1.2",
-        "laravel-vite-plugin": "^0.7.2",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
-        "vite": "^4.0.0"
-    }
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "vite build --config vite.backend.config.js",
+    "build:frontend": "vite build --config vite.frontend.config.js"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "axios": "^1.1.2",
+    "laravel-vite-plugin": "^0.7.2",
+    "lodash": "^4.17.19",
+    "pinia": "^2.0.30",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4",
+    "vite": "^4.0.0",
+    "vue": "^3.2.36",
+    "vue-router": "^4.1.6",
+    "vue3-toastify": "^0.0.6"
+  }
 }

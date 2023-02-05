@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+
+.logotype {
+    @apply text-blue-600;
+}
+
+@tailwind utilities;

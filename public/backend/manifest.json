@@ -1,0 +1,25 @@
+{
+  "resources/js/backend/app.css": {
+    "file": "assets/app-3dc8cc1d.css",
+    "src": "resources/js/backend/app.css"
+  },
+  "resources/js/backend/app.js": {
+    "css": [
+      "assets/app-3dc8cc1d.css"
+    ],
+    "dynamicImports": [
+      "resources/js/backend/views/NotificationsView.vue"
+    ],
+    "file": "assets/app-d1c149ef.js",
+    "isEntry": true,
+    "src": "resources/js/backend/app.js"
+  },
+  "resources/js/backend/views/NotificationsView.vue": {
+    "file": "assets/NotificationsView-ca2ecde2.js",
+    "imports": [
+      "resources/js/backend/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/backend/views/NotificationsView.vue"
+  }
+}
