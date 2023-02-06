@@ -8,6 +8,9 @@ Route::group([
 ], function (): void {
     Route::post('auth/login', 'AuthController@login')->name('auth.login');
 
+    Route::apiResource('notifications', 'NotificationsController');
+    Route::apiResource('notification-categories', 'NotificationCategoriesController');
+
     Route::middleware(['auth:sanctum', 'ability:admin'])->group(function (): void {
         Route::post('auth/logout', 'AuthController@logout')->name('auth.logout');
     });

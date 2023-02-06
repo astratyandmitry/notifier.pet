@@ -41,14 +41,10 @@ class Notification extends Model
         static::created(function (Notification $model): void {
             $model->aggregate()->create();
         });
-    }
 
-    public static function scopeUnreadByUser(Builder $builder, User $user): Builder
-    {
-        // todo: check by settings
-        // todo: check by is read
-
-        return $builder;
+        static::deleted(function (Notification $model): void {
+            $model->aggregate()->delete();
+        });
     }
 
     public function aggregate(): HasOne
@@ -66,13 +62,13 @@ class Notification extends Model
         return $this->hasManyThrough(User::class, PivotNotificationUser::class);
     }
 
-    public function categoriesSync(Collection $categoriesId): void
+    public function categoriesSync(array $categoriesId): void
     {
         if (! $this->wasRecentlyCreated) {
             PivotNotificationCategory::query()->where('notification_id', $this->id)->delete();
         }
 
-        $categoriesId->map(function (int $categoryId): void {
+        collect($categoriesId)->map(function (int $categoryId): void {
             PivotNotificationCategory::query()->create([
                 'notification_id' => $this->id,
                 'category_id' => $categoryId,

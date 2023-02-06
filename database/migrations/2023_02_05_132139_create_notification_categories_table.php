@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('notification_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 80);
+            $table->string('title', 80)->unique();
             $table->timestamps();
         });
     }
