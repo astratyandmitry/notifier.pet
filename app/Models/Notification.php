@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
@@ -16,6 +18,9 @@ use Illuminate\Support\Str;
  *
  * @property \App\Models\NotificationAggregate $aggregate
  * @property \App\Models\NotificationCategory[]|\Illuminate\Database\Eloquent\Collection $categories
+ * @property \App\Models\User[]|\Illuminate\Database\Eloquent\Collection $users
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder unreadByUser(\App\Models\User $user)
  */
 class Notification extends Model
 {
@@ -38,6 +43,14 @@ class Notification extends Model
         });
     }
 
+    public static function scopeUnreadByUser(Builder $builder, User $user): Builder
+    {
+        // todo: check by settings
+        // todo: check by is read
+
+        return $builder;
+    }
+
     public function aggregate(): HasOne
     {
         return $this->hasOne(NotificationAggregate::class);
@@ -45,7 +58,12 @@ class Notification extends Model
 
     public function categories(): HasManyThrough
     {
-        return $this->hasManyThrough(NotificationCategory::class, PivotNotificationCategory::class);
+        return $this->hasManyThrough(NotificationCategory::class, PivotNotificationCategory::class, 'notification_id', 'id', 'id', 'category_id');
+    }
+
+    public function users(): HasManyThrough
+    {
+        return $this->hasManyThrough(User::class, PivotNotificationUser::class);
     }
 
     public function categoriesSync(Collection $categoriesId): void
@@ -59,6 +77,15 @@ class Notification extends Model
                 'notification_id' => $this->id,
                 'category_id' => $categoryId,
             ]);
+        });
+    }
+
+    public function markAsRead(User $user): void
+    {
+        DB::transaction(function () use ($user): void {
+            $this->users()->create(['user_id' => $user->id]);
+
+            $this->aggregate->increment('count_views');
         });
     }
 }

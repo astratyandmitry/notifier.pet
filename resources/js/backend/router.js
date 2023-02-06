@@ -53,6 +53,17 @@ router.beforeEach((to) => {
     'Content-type': 'application/json',
     'Accept': 'application/json',
   }
+
+  axios.interceptors.response.use(function (response) {
+    return response;
+  }, function (error) {
+    if (error.response.status === 401) {
+      auth.resetToken()
+      router.push({name: "login"})
+    }
+
+    return Promise.reject(error.response.status);
+  });
 });
 
 export default router;

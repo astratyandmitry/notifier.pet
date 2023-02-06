@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
 
-        Notification::factory(10)->create();
+        Notification::factory(20)->create();
 
         Notification::query()->get()->map(function (Notification $notification): void {
             $notification->categoriesSync(

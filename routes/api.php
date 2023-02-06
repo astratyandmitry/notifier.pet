@@ -22,5 +22,12 @@ Route::group([
 
     Route::middleware(['auth:sanctum', 'ability:client'])->group(function (): void {
         Route::post('auth/logout', 'AuthController@logout')->name('auth.logout');
+
+        Route::get('/notifications', 'NotificationsController@index');
+        Route::post('/notifications/{id}/read', 'NotificationsController@read');
+
+        Route::get('/notification-settings', 'NotificationSettingsController@index');
+        Route::put('/notification-settings', 'NotificationSettingsController@update');
+        Route::post('/notification-settings/unsubscribe/{categoryId}', 'NotificationSettingsController@unsubscribe');
     });
 });

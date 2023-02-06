@@ -52,7 +52,7 @@ router.beforeEach((to) => {
   axios.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
-    if (error.response.status) {
+    if (error.response.status === 401) {
       auth.resetToken()
       router.push({name: "login"})
     }
