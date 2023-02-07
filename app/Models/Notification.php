@@ -79,7 +79,10 @@ class Notification extends Model
     public function markAsRead(User $user): void
     {
         DB::transaction(function () use ($user): void {
-            $this->users()->create(['user_id' => $user->id]);
+            PivotNotificationUser::query()->create([
+                'notification_id' => $this->id,
+                'user_id' => $user->id,
+            ]);
 
             $this->aggregate->increment('count_views');
         });

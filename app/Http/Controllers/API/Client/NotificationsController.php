@@ -39,7 +39,7 @@ class NotificationsController extends Controller
         // todo: Move to Service
 
         /** @var \App\Models\Notification $notification */
-        $notification = Notification::unreadByUser($request->user())->findOrFail($id);
+        $notification = Notification::query()->findOrFail($id);
         $notification->markAsRead($request->user());
 
         return response()->noContent(FoundationHttp::HTTP_ACCEPTED);

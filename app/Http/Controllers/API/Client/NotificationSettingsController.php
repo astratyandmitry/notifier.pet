@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\Client;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -38,13 +39,16 @@ class NotificationSettingsController extends Controller
         return response()->noContent(FoundationResponse::HTTP_ACCEPTED);
     }
 
-    public function unsubscribe(int $categoryId, Request $request): Response
+    public function unsubscribe(int $notificationId, Request $request): Response
     {
         // todo: Move to Service
 
+        /** @var \App\Models\Notification $notification */
+        $notification = Notification::query()->findOrFail($notificationId);
+
         $setting = UserNotificationSetting::query()
             ->where('user_id', $request->user()->id)
-            ->where('category_id', $categoryId)
+            ->whereIn('category_id', $notification->categories->pluck('id'))
             ->firstOrFail();
 
         $setting->update(['allowed' => false]);

@@ -9,7 +9,3 @@ const message = ref("Hello from Frontend");
     <RouterView />
   </div>
 </template>
-
-<style lang="postcss" scoped>
-
-</style>

@@ -31,6 +31,6 @@ Route::group([
 
         Route::get('/notification-settings', 'NotificationSettingsController@index');
         Route::put('/notification-settings', 'NotificationSettingsController@update');
-        Route::post('/notification-settings/unsubscribe/{categoryId}', 'NotificationSettingsController@unsubscribe');
+        Route::post('/notification-settings/{notificationID}/unsubscribe', 'NotificationSettingsController@unsubscribe');
     });
 });
