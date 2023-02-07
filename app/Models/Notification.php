@@ -59,7 +59,7 @@ class Notification extends Model
 
     public function users(): HasManyThrough
     {
-        return $this->hasManyThrough(User::class, PivotNotificationUser::class);
+        return $this->hasManyThrough(User::class, PivotNotificationUser::class, 'notification_id', 'id', 'id', 'user_id');
     }
 
     public function categoriesSync(array $categoriesId): void

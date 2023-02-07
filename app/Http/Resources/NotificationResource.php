@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\NotificationCategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -17,6 +18,7 @@ class NotificationResource extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'aggregate' => new NotificationAggregateResource($this->aggregate),
+            'categories' => NotificationCategoryResource::collection($this->categories),
         ];
     }
 }

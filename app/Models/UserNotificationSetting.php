@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class UserNotificationSetting extends Model
 {
-    protected $fillable = ['allowed'];
+    protected $guarded = [];
 
     public $timestamps = false;
 

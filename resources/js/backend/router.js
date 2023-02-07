@@ -14,6 +14,36 @@ const routes = [
     component: () => import('./views/NotificationsView.vue'),
   },
   {
+    path: '/notifications',
+    name: 'notifications.list',
+    component: () => import('./views/NotificationsList.vue'),
+  },
+  {
+    path: '/notifications/create',
+    name: 'notifications.create',
+    component: () => import('./views/NotificationsForm.vue'),
+  },
+  {
+    path: '/notifications/:id/edit',
+    name: 'notifications.edit',
+    component: () => import('./views/NotificationsForm.vue'),
+  },
+  {
+    path: '/categories',
+    name: 'categories.list',
+    component: () => import('./views/CategoriesList.vue'),
+  },
+  {
+    path: '/categories/create',
+    name: 'categories.create',
+    component: () => import('./views/CategoriesForm.vue'),
+  },
+  {
+    path: '/categories/:id/edit',
+    name: 'categories.edit',
+    component: () => import('./views/CategoriesForm.vue'),
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('./views/LoginView.vue'),

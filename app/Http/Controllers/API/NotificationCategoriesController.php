@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\NotificationCategory;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\NotificationRequest;
 use App\Http\Resources\NotificationCategoryResource;
 use App\Http\Requests\API\NotificationCategoryRequest;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -37,7 +36,7 @@ class NotificationCategoriesController extends Controller
         return new NotificationCategoryResource($category);
     }
 
-    public function update(NotificationRequest $request, int $id): JsonResponse
+    public function update(NotificationCategoryRequest $request, int $id): JsonResponse
     {
         $category = NotificationCategory::query()->findOrFail($id);
         $category->update($request->validated());

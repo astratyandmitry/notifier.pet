@@ -19,7 +19,7 @@ class NotificationCategory extends Model
         // todo: move to EventServiceProvider
 
         static::created(function (NotificationCategory $model): void {
-            User::query()->get()->map(function(User $user) use ($model): void {
+            User::query()->get()->map(function (User $user) use ($model): void {
                 $user->notificationSettings()->create([
                     'category_id' => $model->id,
                     'allowed' => true,
@@ -28,12 +28,13 @@ class NotificationCategory extends Model
         });
 
         static::deleting(function (NotificationCategory $model): void {
-            $model->notifications()->delete();
+            UserNotificationSetting::query()->where('category_id', $model->id)->delete();
+            PivotNotificationCategory::query()->where('category_id', $model->id)->delete();
         });
     }
 
     public function notifications(): HasManyThrough
     {
-        return $this->hasManyThrough(Notification::class, NotificationAggregate::class);
+        return $this->hasManyThrough(Notification::class, PivotNotificationCategory::class, 'category_id', 'id', 'id', 'notification_id');
     }
 }

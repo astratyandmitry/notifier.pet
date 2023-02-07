@@ -26,6 +26,8 @@ class NotificationsController extends Controller
         $notification = Notification::query()->create($request->except('categories'));
         $notification->categoriesSync($request->categories);
 
+        // todo: broadcast event
+
         return response()->json([
             'message' => 'Notification created successfully',
             'data' => new NotificationResource($notification),

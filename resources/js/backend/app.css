@@ -25,4 +25,8 @@
     @apply form-input rounded border-gray-200 w-full flex-1;
 }
 
+.button-icon {
+    @apply p-2 rounded hover:bg-indigo-100 text-gray-400 hover:text-indigo-600;
+}
+
 @tailwind utilities;

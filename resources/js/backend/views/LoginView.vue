@@ -35,35 +35,41 @@ const login = () => {
 
 <template>
   <div class="min-h-screen flex w-full items-center justify-center">
-    <div class="form w-[400px] mx-auto space-y-4">
-      <div class="field">
-        <input
-          v-model.trim="data.email"
-          id="email"
-          type="text"
-          placeholder="E-mail"
-          class="input"
-          required
-          @keydown.enter="login"
-        />
-      </div>
+    <div>
+      <h1 class="text-2xl text-center mb-8">
+        <span class="text-indigo-600">Notifier</span>Admin
+      </h1>
 
-      <div>
-        <input
-          v-model="data.password"
-          id="password"
-          type="password"
-          placeholder="Password"
-          class="input"
-          required
-          @keydown.enter="login"
-        />
-      </div>
+      <div class="form w-[400px] mx-auto space-y-4">
+        <div class="field">
+          <input
+            v-model.trim="data.email"
+            id="email"
+            type="text"
+            placeholder="E-mail"
+            class="input"
+            required
+            @keydown.enter="login"
+          />
+        </div>
 
-      <div>
-        <button class="button w-full" :disabled="disabled" @click="login">
-          Login
-        </button>
+        <div>
+          <input
+            v-model="data.password"
+            id="password"
+            type="password"
+            placeholder="Password"
+            class="input"
+            required
+            @keydown.enter="login"
+          />
+        </div>
+
+        <div>
+          <button class="button w-full" :disabled="disabled" @click="login">
+            Login
+          </button>
+        </div>
       </div>
     </div>
   </div>
