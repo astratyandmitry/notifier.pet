@@ -10,11 +10,11 @@
 }
 
 .field {
-    @apply flex items-center space-x-4;
+    @apply flex items-start space-x-4;
 }
 
 .label {
-    @apply block text-xs font-medium text-gray-500 uppercase tracking-wider w-40 text-right;
+    @apply block text-xs font-medium text-gray-500 uppercase tracking-wider w-40 text-right pt-2;
 }
 
 .label strong {

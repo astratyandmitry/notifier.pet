@@ -1,18 +1,14 @@
 <script setup>
-import ClientsForm from "../components/Categories/ClientsForm.vue";
+import NotificationsForm from "../components/Notifications/NotificationsForm.vue";
 import AppPage from "../components/UI/AppPage.vue";
 </script>
 
 <template>
   <AppPage>
     <template #title>
-      Client Management
+      Notifications Management
     </template>
 
-    <ClientsForm />
+    <NotificationsForm />
   </AppPage>
 </template>
-
-<style lang="postcss" scoped>
-
-</style>
